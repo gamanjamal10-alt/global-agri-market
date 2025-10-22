@@ -1,20 +1,11 @@
+
 import { GoogleGenAI } from "@google/genai";
 
-const API_KEY = process.env.API_KEY;
-
-// Conditionally initialize the AI client only if an API key is provided.
-const ai = API_KEY ? new GoogleGenAI({ apiKey: API_KEY }) : null;
-
-if (!ai) {
-  console.warn("Gemini API key not found. AI features will be disabled.");
-}
+// Fix: Per guidelines, API_KEY is assumed to be available in process.env.
+// The client should be initialized directly without conditional checks.
+const ai = new GoogleGenAI({ apiKey: process.env.API_KEY as string });
 
 export const generateProductDescription = async (productName: string, category: string): Promise<string> => {
-  // If the AI client wasn't initialized, return a fallback description immediately.
-  if (!ai) {
-    return `High-quality ${productName}, freshly harvested and ready for your customers. A staple in the ${category} category, perfect for a variety of uses.`;
-  }
-
   try {
     const prompt = `Generate a compelling and brief marketplace description for an agricultural product. The product is "${productName}" in the category "${category}". Focus on freshness, quality, and appeal to wholesalers and retailers. Do not use markdown.`;
     

@@ -1,11 +1,12 @@
 
 import React, { useContext } from 'react';
 import { AuthContext } from '../contexts/AuthContext';
+import { LanguageContext } from '../contexts/LanguageContext';
 import FarmerDashboard from '../components/Dashboard/FarmerDashboard';
+import WholesalerDashboard from '../components/Dashboard/WholesalerDashboard';
 import RetailerDashboard from '../components/Dashboard/RetailerDashboard';
 import LogisticsDashboard from '../components/Dashboard/LogisticsDashboard';
 import Spinner from '../components/ui/Spinner';
-import { LanguageContext } from '../contexts/LanguageContext';
 
 const DashboardPage: React.FC = () => {
   const { user, loading } = useContext(AuthContext);
@@ -14,21 +15,24 @@ const DashboardPage: React.FC = () => {
   if (loading) {
     return <div className="flex justify-center items-center h-screen"><Spinner /></div>;
   }
-
+  
   if (!user) {
-    return <p className="text-center text-red-500 mt-10">You must be logged in to view the dashboard.</p>;
+    // This should ideally not be reached due to ProtectedRoute, but as a fallback.
+    return <p>Please log in to see your dashboard.</p>;
   }
 
   const renderDashboard = () => {
-    switch (user.role) {
+    switch(user.role) {
       case 'Farmer':
         return <FarmerDashboard user={user} />;
+      case 'Wholesaler':
+        return <WholesalerDashboard user={user} />;
       case 'Retailer':
         return <RetailerDashboard user={user} />;
       case 'Logistics':
         return <LogisticsDashboard user={user} />;
       default:
-        return <p>Invalid user role.</p>;
+        return <p>No dashboard available for your role.</p>;
     }
   };
 

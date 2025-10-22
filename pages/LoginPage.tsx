@@ -2,8 +2,8 @@
 import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthContext';
-import { UserRole } from '../types';
 import { LanguageContext } from '../contexts/LanguageContext';
+import { UserRole } from '../types';
 
 const LoginPage: React.FC = () => {
   const { login } = useContext(AuthContext);
@@ -19,28 +19,24 @@ const LoginPage: React.FC = () => {
     <div className="flex items-center justify-center min-h-screen bg-gray-50 dark:bg-gray-900">
       <div className="w-full max-w-md p-8 space-y-8 bg-white dark:bg-gray-800 rounded-2xl shadow-xl">
         <div className="text-center">
-          <h1 className="text-4xl font-extrabold text-gray-900 dark:text-white">{t('welcome_to_gam')}</h1>
-          <p className="mt-2 text-lg text-gray-600 dark:text-gray-400">{t('login_as')}</p>
+            <span className="text-5xl">🌍</span>
+            <h2 className="mt-4 text-3xl font-extrabold text-gray-900 dark:text-white">{t('login_to_account')}</h2>
+            <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">{t('select_role_to_continue')}</p>
         </div>
+        
         <div className="space-y-4">
-          <button
-            onClick={() => handleLogin('Farmer')}
-            className="w-full flex items-center justify-center px-6 py-4 text-lg font-semibold text-white bg-primary-600 rounded-lg shadow-md hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition-transform transform hover:scale-105"
-          >
-            <span className="me-3">👩‍🌾</span> {t('farmer')}
-          </button>
-          <button
-            onClick={() => handleLogin('Retailer')}
-            className="w-full flex items-center justify-center px-6 py-4 text-lg font-semibold text-white bg-blue-600 rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition-transform transform hover:scale-105"
-          >
-            <span className="me-3">🛒</span> {t('retailer')}
-          </button>
-          <button
-            onClick={() => handleLogin('Logistics')}
-            className="w-full flex items-center justify-center px-6 py-4 text-lg font-semibold text-white bg-gray-600 rounded-lg shadow-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition-transform transform hover:scale-105"
-          >
-            <span className="me-3">🚚</span> {t('logistics')}
-          </button>
+            <button onClick={() => handleLogin('Farmer')} className="w-full flex justify-center items-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 dark:focus:ring-offset-gray-800">
+              {t('login_as_farmer')}
+            </button>
+            <button onClick={() => handleLogin('Wholesaler')} className="w-full flex justify-center items-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 dark:focus:ring-offset-gray-800">
+              {t('login_as_wholesaler')}
+            </button>
+            <button onClick={() => handleLogin('Retailer')} className="w-full flex justify-center items-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 dark:focus:ring-offset-gray-800">
+              {t('login_as_retailer')}
+            </button>
+            <button onClick={() => handleLogin('Logistics')} className="w-full flex justify-center items-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-yellow-500 hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 dark:focus:ring-offset-gray-800">
+              {t('login_as_logistics')}
+            </button>
         </div>
       </div>
     </div>
