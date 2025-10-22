@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Link } from 'react-router-dom';
 import { User, Order, OrderStatus } from '../../types';
 import * as api from '../../services/mockApi';
 import Spinner from '../ui/Spinner';
 import { LanguageContext } from '../../contexts/LanguageContext';
+import { Link } from 'react-router-dom';
 
 interface WholesalerDashboardProps {
   user: User;
@@ -50,7 +50,7 @@ const WholesalerDashboard: React.FC<WholesalerDashboardProps> = ({ user }) => {
                 <th scope="col" className="px-6 py-3">{t('total_price')}</th>
                 <th scope="col" className="px-6 py-3">{t('order_date')}</th>
                 <th scope="col" className="px-6 py-3">{t('status')}</th>
-                <th scope="col" className="px-6 py-3">{t('action')}</th>
+                <th scope="col" className="px-6 py-3">{t('tracking')}</th>
               </tr>
             </thead>
             <tbody>
@@ -58,8 +58,8 @@ const WholesalerDashboard: React.FC<WholesalerDashboardProps> = ({ user }) => {
                 <tr key={order.id} className="bg-white dark:bg-gray-800 border-b dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                   <td className="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
                     <div className="flex items-center">
-                        <img src={order.productImageUrl} alt={order.productName} className="w-10 h-10 rounded-md me-3 object-cover" />
-                        {order.productName}
+                      <img src={order.productImageUrl} alt={order.productName} className="w-10 h-10 rounded-md me-3 object-cover" />
+                      {order.productName}
                     </div>
                   </td>
                   <td className="px-6 py-4">{order.quantity} kg</td>
