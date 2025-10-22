@@ -3,7 +3,8 @@ import { GoogleGenAI } from "@google/genai";
 
 // Fix: Per guidelines, API_KEY is assumed to be available in process.env.
 // The client should be initialized directly without conditional checks.
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY as string });
+// Fix: Removed 'as string' type assertion. The SDK expects the API key to be provided.
+const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
 export const generateProductDescription = async (productName: string, category: string): Promise<string> => {
   try {
