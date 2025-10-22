@@ -1,17 +1,17 @@
-
 import { GoogleGenAI } from "@google/genai";
 
-// Assume API_KEY is set in the environment variables
 const API_KEY = process.env.API_KEY;
 
-if (!API_KEY) {
+// Conditionally initialize the AI client only if an API key is provided.
+const ai = API_KEY ? new GoogleGenAI({ apiKey: API_KEY }) : null;
+
+if (!ai) {
   console.warn("Gemini API key not found. AI features will be disabled.");
 }
 
-const ai = new GoogleGenAI({ apiKey: API_KEY });
-
 export const generateProductDescription = async (productName: string, category: string): Promise<string> => {
-  if (!API_KEY) {
+  // If the AI client wasn't initialized, return a fallback description immediately.
+  if (!ai) {
     return `High-quality ${productName}, freshly harvested and ready for your customers. A staple in the ${category} category, perfect for a variety of uses.`;
   }
 
